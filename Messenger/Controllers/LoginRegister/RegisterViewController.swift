@@ -110,13 +110,16 @@ class RegisterViewController: UIViewController {
     imageView.image = UIImage(systemName: "person")
     imageView.tintColor = .gray
     imageView.contentMode = .scaleAspectFit
+    imageView.layer.masksToBounds = true
+    imageView.layer.borderWidth = 2
+    imageView.layer.borderColor = UIColor.lightGray.cgColor
     return imageView
   }()
   
   override func viewDidLoad() {
     super.viewDidLoad()
     
-    title = "Log In"
+    title = "Register"
     view.backgroundColor = .white
     
     // setup buttons and actions
@@ -157,6 +160,7 @@ class RegisterViewController: UIViewController {
     // layout the logo
     let size = scrollView.width / 3
     imageView.frame = CGRect(x: (scrollView.width - size) / 2, y: 20, width: size, height: size)
+    imageView.layer.cornerRadius = imageView.width / 2
     
     // layout email field
     emailField.frame = CGRect(x: 30, y: imageView.bottom + 10, width: scrollView.width - 60, height: 52)
@@ -176,7 +180,7 @@ class RegisterViewController: UIViewController {
   }
   
   @objc private func didTapChangeProfilePicture() {
-    print("Change profile picture")
+    presentPhotoActionSheet()
   }
   
   @objc private func registerButtonTapped() {
@@ -188,7 +192,7 @@ class RegisterViewController: UIViewController {
     lastNameField.resignFirstResponder()
     
     guard let email = emailField.text, let password = passwordField.text, let firstName = firstNameField.text, let lastName = lastNameField.text,
-            !email.isEmpty, !password.isEmpty, password.count >= 6, !firstName.isEmpty, !lastName.isEmpty else {
+          !email.isEmpty, !password.isEmpty, password.count >= 6, !firstName.isEmpty, !lastName.isEmpty else {
       alertUserLoginError()
       return
     }
@@ -235,5 +239,57 @@ extension RegisterViewController: UITextFieldDelegate {
     }
     
     return true
+  }
+}
+
+// MARK: - Image Picker methods
+extension RegisterViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+  
+  /// called when user selects a photo
+  func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+    guard let selectedImage = info[.editedImage] as? UIImage else { return }
+    
+    self.imageView.image = selectedImage
+    
+    picker.dismiss(animated: true, completion: nil)
+  }
+  
+  /// called when the user cancels the flow
+  func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
+    picker.dismiss(animated: true, completion: nil)
+  }
+  
+  private func presentPhotoActionSheet() {
+    let actionSheet = UIAlertController(title: "Profile Picture", message: "Please select an option", preferredStyle: .actionSheet)
+    
+    actionSheet.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
+    
+    actionSheet.addAction(UIAlertAction(title: "Take Photo", style: .default, handler: { [weak self] _ in
+      self?.presentCamera()
+    }))
+    
+    actionSheet.addAction(UIAlertAction(title: "Choose from Library", style: .default, handler: { [weak self] _ in
+      self?.presentPhotoPicker()
+    }))
+    
+    present(actionSheet, animated: true)
+  }
+  
+  private func presentCamera() {
+    let vc = UIImagePickerController()
+    vc.sourceType = .camera
+    vc.delegate = self
+    vc.allowsEditing = true
+    
+    present(vc, animated: true)
+  }
+  
+  private func presentPhotoPicker() {
+    let vc = UIImagePickerController()
+    vc.sourceType = .photoLibrary
+    vc.delegate = self
+    vc.allowsEditing = true
+    
+    present(vc, animated: true)
   }
 }
