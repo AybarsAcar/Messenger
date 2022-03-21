@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0000A29F27E867210042E11B /* DatabaseManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0000A29E27E867210042E11B /* DatabaseManager.swift */; };
 		003DF49027E72BA00058015B /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 003DF48F27E72BA00058015B /* GoogleService-Info.plist */; };
 		003E2C7527E68BB900D643B1 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 003E2C7427E68BB900D643B1 /* AppDelegate.swift */; };
 		003E2C7727E68BB900D643B1 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 003E2C7627E68BB900D643B1 /* SceneDelegate.swift */; };
@@ -25,6 +26,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		0000A29E27E867210042E11B /* DatabaseManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatabaseManager.swift; sourceTree = "<group>"; };
 		003DF48F27E72BA00058015B /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		003E2C7127E68BB900D643B1 /* Messenger.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Messenger.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		003E2C7427E68BB900D643B1 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -100,6 +102,7 @@
 				003E2C7427E68BB900D643B1 /* AppDelegate.swift */,
 				003E2C7627E68BB900D643B1 /* SceneDelegate.swift */,
 				00D7198B27E70A4300A6341F /* Extensions.swift */,
+				0000A29E27E867210042E11B /* DatabaseManager.swift */,
 			);
 			path = Resources;
 			sourceTree = "<group>";
@@ -288,6 +291,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				00CCDF5327E68F2A00D8AA8C /* LoginViewController.swift in Sources */,
+				0000A29F27E867210042E11B /* DatabaseManager.swift in Sources */,
 				00CCDF5527E68F3600D8AA8C /* RegisterViewController.swift in Sources */,
 				00CCDF5B27E68F7D00D8AA8C /* NewConversationViewController.swift in Sources */,
 				003E2C7927E68BB900D643B1 /* ConversationsViewController.swift in Sources */,
